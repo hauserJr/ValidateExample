@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="form-group">
+    <label class="control-label required" for="SelectWrite"></label>
+    <div class="input-group">
+        @using (Html.BeginForm("ValidateExamplePage", "ValidateExample"))
+        {
+        <button type="submit" class="btn btn-link"><h4>ValidateExample</h4></button>
+        }
+    </div>
+</div>
