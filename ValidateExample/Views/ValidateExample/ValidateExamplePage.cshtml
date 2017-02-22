@@ -5,59 +5,100 @@
 
 <div class="container">
     <form name="form1" id="form1">
-        <label for="STR_Write" class="control-label required"></label>
-        <div class="form-group">
-            <label class="control-label" for="STR_Write">必填欄位：</label>
-            <div class="input-group">
-                <span class="input-group-addon">€</span>
-                <input class="form-control" name="STR_Write" type="text" />
-            </div>
+        <div>
+            <h3><strong>以下範例設定如下：</strong></h3><br>          
+            <mark>1.須為必填 2.須為數字 3.數字必須大於(含)5且小於(含)10</mark>
+            <p><a href="https://jqueryvalidation.org/" style="font-size:16px">詳細可查看：validate.js</a>
+            
+            <table>
+                <tr>
+                    <td class="col-lg-4">
+                        <label for="STR_Write_JavaScript" class="control-label required"></label>
+                        <div class="form-group">
+                            <label class="control-label" for="STR_Write_JavaScript">必填欄位_JavaScript設定：此處是透過Script設定 <button type="button" class="btn btn-info" onclick="showPV()">按我查看原始碼</button></label>
+                            <div class="input-group">
+                                <span class="input-group-addon">€</span>
+                                <input class="form-control" name="STR_Write_JavaScript" type="text" placeholder="請輸入..."/>
+                            </div>
+                        </div>
+                        <label for="STR_Write_Attributes" class="control-label required"></label>
+                        <div class="form-group">
+                            <label class="control-label" for="STR_Write_Attributes">必填欄位_屬性設定：此處是透過直接設定屬性</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">€</span>
+                                <input class="form-control"  name="STR_Write_Attributes" type="text" digits='true' required='true' min="5" max='10' placeholder="請輸入..."/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
         </div>
     </form>
 </div>
-@section headerJS{
-    <script src="~/Scripts/Custom_jquery.validate.min.js"></script>
-}
-<script>
-    $(window).ready(function () {
-        $('#form1').validate({
-            rules: {
-                'STR_Write': {
-                    required: true,
-                    selectedwrite: true,
-                    digits: true
-                },
-            },
-            //花式自訂
-            highlight: function (element, errorClass, validClass) {
-                if (element.type === "radio") {
-                    this.findByName(element.name).addClass(errorClass).removeClass(validClass);
-                } else {
-                    $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
-                    //$(element).closest('.form-group').find('i.fa').remove();
-                    //$(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
-                }
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                if (element.type === "radio") {
-                    this.findByName(element.name).removeClass(errorClass).addClass(validClass);
-                } else {
-                    $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
-                    //$(element).closest('.form-group').find('i.fa').remove();
-                    //$(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
-                }
-            },
-            errorElement: 'span',
-            errorClass: 'help-block',
-            errorPlacement: function (error, element) {
-                if (element.parent('.input-group').length) {
-                    error.insertAfter(element.parent());
-                } else {
-                    error.insertAfter(element);
-                }
-            }
-        });
-    });
 
-</script>
+<div class="container">
+    <address>
+    <div id="JsSetting" name="JsSetting"></div>
+    </address>
+</div>
+
+
+    @section headerJS{
+        <script src="~/Scripts/Custom_jquery.validate.min.js"></script>
+    }
+    <script>
+
+
+        function showPV() {
+            $("#JsSetting").html('');
+            var el = $("#JsSetting");
+            $(el).load("@Url.Action("loadPV", "ValidateExample")"
+                        , { ViewName: "_jspv" }
+                , function () {
+                });
+        }
+
+        $(window).ready(function () {
+            $('#form1').validate({
+                rules: {
+                    'STR_Write_JavaScript': {
+                        required: true,
+                        digits: true,
+                        min: 5,
+                        max: 10
+                    },
+                },
+                //花式自訂
+                highlight: function (element, errorClass, validClass) {
+                    if (element.type === "radio") {
+                        this.findByName(element.name).addClass(errorClass).removeClass(validClass);
+                    } else {
+                        $(element).closest('.form-group').removeClass('has-success has-feedback').addClass('has-error has-feedback');
+                        //$(element).closest('.form-group').find('i.fa').remove();
+                        //$(element).closest('.form-group').append('<i class="fa fa-exclamation fa-lg form-control-feedback"></i>');
+                    }
+                },
+                unhighlight: function (element, errorClass, validClass) {
+                    if (element.type === "radio") {
+                        this.findByName(element.name).removeClass(errorClass).addClass(validClass);
+                    } else {
+                        $(element).closest('.form-group').removeClass('has-error has-feedback').addClass('has-success has-feedback');
+                        //$(element).closest('.form-group').find('i.fa').remove();
+                        //$(element).closest('.form-group').append('<i class="fa fa-check fa-lg form-control-feedback"></i>');
+                    }
+                },
+                errorElement: 'span',
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) {
+                    if (element.parent('.input-group').length) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+        });
+
+    </script>
 

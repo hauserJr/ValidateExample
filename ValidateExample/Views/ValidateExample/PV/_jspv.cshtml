@@ -1,0 +1,35 @@
+﻿<form>
+
+    1.在HTML注意最外層div的Class要設定為<mark>form-group,</mark><p>
+        <mark>label for</mark>設定需與<mark>欲檢查的項目name</mark>一致才能成功檢查.
+    <p>
+    2.JavaScript程式碼,<p>
+    <mark>$('#form1').validate</mark>在畫面載入時,告知validate要套用以下設定,
+    <p></p><p>
+        <mark>required: true</mark> >> 設定為必填
+    <p>
+        <mark>digits: true</mark> >> 只能輸入數字
+    <p>
+        <mark>min: 5</mark> >> 數字不得小於5
+    <p>
+        <mark>max: 10</mark> >> 數字不得大於10
+    <p>
+        有更多的設定都類似這樣,不多做說明.
+        <div id="example">
+        </div>
+</form>
+<script>
+    var oWrite1 = document.write
+    var oWrite2 = document.write
+    //$('#example').offset(); 20170223準備利用此新增自動滑動效果
+    document.write = function (node) {
+        $("#example").append(node)
+    }
+    $.getScript("/Scripts/example/example1.js", function () {
+        $('#example').HTML = oWrite1
+    });
+
+    $.getScript("/Scripts/example/example2.js", function () {
+        $('#example').HTML = oWrite1
+    });
+</script>

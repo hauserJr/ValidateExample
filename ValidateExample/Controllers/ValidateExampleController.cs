@@ -13,5 +13,9 @@ namespace ValidateExample.Controllers
         {
             return View();
         }
+        public PartialViewResult loadPV(string ViewName = null)
+        {         
+            return PartialView("PV/"+ ViewName);
+        }
     }
 }

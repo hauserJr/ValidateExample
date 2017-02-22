@@ -216,6 +216,8 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Custom_jquery.validate.min.js" />
+    <Content Include="Scripts\example\example1.js" />
+    <Content Include="Scripts\example\example2.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -241,6 +243,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\ValidateExample\ValidateExamplePage.cshtml" />
+    <Content Include="Views\ValidateExample\PV\_jspv.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
